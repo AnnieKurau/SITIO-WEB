@@ -1,0 +1,329 @@
+
+/*==================================================
+    ESCENA
+==================================================*/
+
+.cards-scene{
+    position:relative;
+    width:min(1200px,95vw);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transform:
+        translateY(50px)
+        scale(.92);
+
+    filter:blur(10px);
+    animation:
+        cardsSceneIn
+        1s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+
+/*==================================================
+    TÍTULOS
+==================================================*/
+
+.cards-title{
+    font-size:clamp(2.3rem,2.5vw,3.3rem);
+    font-weight:700;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+.cards-subtitle{
+    font-size:1.1rem;
+    opacity:.75;
+    margin-bottom:45px;
+    letter-spacing:.5px;
+}
+
+
+/*==================================================
+    COVERFLOW
+==================================================*/
+
+.cards-coverflow{
+    position:relative;
+    width:100%;
+    height:430px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    perspective:1800px;
+    transform-style:preserve-3d;
+}
+
+
+/*==================================================
+    CARTAS
+==================================================*/
+
+.saving-card{
+    position:absolute;
+    width:240px;
+    height:360px;
+    cursor:pointer;
+    user-select:none;
+    transition:
+        transform .65s cubic-bezier(.22,.61,.36,1),
+        opacity .45s ease,
+        filter .45s ease,
+        z-index .45s ease;
+}
+
+
+/*==================================================
+    CUERPO
+==================================================*/
+
+.card-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transform-style:preserve-3d;
+    transition:
+        transform .8s cubic-bezier(.16,1,.3,1);
+}
+
+
+/*==================================================
+    CARAS
+==================================================*/
+
+.card-face{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    border-radius:18px;
+    backface-visibility:hidden;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.45);
+}
+
+
+.card-front{
+    transform:rotateY(180deg);
+}
+
+.card-back{
+    transform:rotateY(0deg);
+}
+
+
+/*==================================================
+    IMÁGENES
+==================================================*/
+
+.card-face img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:
+        transform .5s ease,
+        filter .5s ease;
+}
+
+
+/*==================================================
+    TEXTO
+==================================================*/
+
+.selected-card-title{
+    margin-top:35px;
+    min-height:55px;
+    text-align:center;
+    font-size:1.25rem;
+    font-weight:500;
+    line-height:1.35;
+    opacity:0;
+    transform:translateY(12px);
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+}
+
+.selected-card-title.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+
+/*==================================================
+    BOTÓN
+==================================================*/
+
+.cards-button{
+    margin-top:40px;
+    min-width:220px;
+}
+
+/*==================================================
+    ESTADOS DEL COVERFLOW
+==================================================*/
+
+.saving-card.active{
+    transform:translateX(0) translateZ(180px) scale(1.15);
+    z-index:5;
+}
+
+.saving-card.active .card-inner{
+    transform:rotateY(180deg);
+}
+
+.saving-card.active img{
+    filter:none;
+}
+
+.saving-card.left{
+    transform:translateX(-260px) rotateY(45deg) scale(.82);
+    opacity:.65;
+    z-index:3;
+}
+
+.saving-card.right{
+    transform:translateX(260px) rotateY(-45deg) scale(.82);
+    opacity:.65;
+    z-index:3;
+}
+
+.saving-card.left img,
+.saving-card.right img{
+    filter:grayscale(100%) brightness(.65);
+}
+
+.saving-card.far-left{
+    transform:translateX(-430px) rotateY(55deg) scale(.65);
+    opacity:0;
+    pointer-events:none;
+}
+
+.saving-card.far-right{
+    transform:translateX(430px) rotateY(-55deg) scale(.65);
+    opacity:0;
+    pointer-events:none;
+}
+
+/*==================================================
+    EFECTOS
+==================================================*/
+
+.saving-card.active .card-face{
+    box-shadow:
+        0 0 35px rgba(255,233,70,.45),
+        0 25px 60px rgba(0,0,0,.55);
+}
+
+.saving-card.active img{
+    transform:scale(1.03);
+}
+
+.saving-card.pulse{
+    animation:cardPulse .35s ease;
+}
+
+.saving-card.selected{
+    animation:selectedCard .7s ease forwards;
+}
+
+/*==================================================
+    DESTELLO
+==================================================*/
+
+.saving-card.active::after{
+    content:"";
+    position:absolute;
+    inset:-12px;
+    border-radius:22px;
+    background:radial-gradient(circle,rgba(255,233,70,.55),transparent 70%);
+    opacity:0;
+    pointer-events:none;
+    animation:sparkle 1.2s infinite;
+}
+
+/*==================================================
+    ANIMACIONES
+==================================================*/
+
+@keyframes cardsSceneIn{
+    from{
+        opacity:0;
+        transform:translateY(50px) scale(.92);
+        filter:blur(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+        filter:blur(0);
+    }
+}
+
+@keyframes sparkle{
+    0%,100%{
+        opacity:0;
+        transform:scale(.9);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.12);
+    }
+}
+
+@keyframes cardPulse{
+    0%{transform:translateX(0) translateZ(180px) scale(1.15);}
+    50%{transform:translateX(0) translateZ(180px) scale(1.22);}
+    100%{transform:translateX(0) translateZ(180px) scale(1.15);}
+}
+
+@keyframes selectedCard{
+    0%{
+        transform:translateX(0) translateZ(180px) scale(1.15);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-80px) scale(1.35);
+        opacity:0;
+    }
+}
+
+/*==================================================
+    RESPONSIVE
+==================================================*/
+
+@media (max-width:1000px){
+
+    .cards-coverflow{
+        height:360px;
+    }
+
+    .saving-card{
+        width:190px;
+        height:285px;
+    }
+
+    .saving-card.left{
+        transform:translateX(-200px) rotateY(40deg) scale(.82);
+    }
+
+    .saving-card.right{
+        transform:translateX(200px) rotateY(-40deg) scale(.82);
+    }
+
+    .saving-card.far-left{
+        transform:translateX(-320px) rotateY(55deg) scale(.6);
+    }
+
+    .saving-card.far-right{
+        transform:translateX(320px) rotateY(-55deg) scale(.6);
+    }
+
+    .selected-card-title{
+        font-size:1.1rem;
+    }
+
+}
