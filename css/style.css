@@ -186,7 +186,7 @@ height:100%;
 }
 
 .logo-sura{
-    width:clamp(400px,60vw,700px);
+    width:clamp(400px,60vw,700px); 
     height:auto;
     /*animation:logoReveal 2.2s ease forwards;
     filter:
