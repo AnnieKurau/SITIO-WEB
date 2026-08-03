@@ -110,27 +110,6 @@
 }
 
 /*==================================================
-    TEXTO
-==================================================*/
-
-.card-caption{
-    min-height:50px;
-    text-align:center;
-    margin-top:12px;
-    line-height:1.3;
-    font-size:1.2rem;
-    font-weight:500;
-    opacity:0;
-    transform:translateY(12px);
-    transition:.35s ease;
-}
-
-.card-caption.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/*==================================================
     BOTÓN
 ==================================================*/
 
@@ -224,7 +203,6 @@
 .cards-title{animation-delay:.05s;}
 .cards-subtitle{animation-delay:.15s;}
 .coverflow{animation-delay:.25s;}
-.card-caption{animation-delay:.45s;}
 #cardContinue{animation-delay:.6s;}
 
 /*==================================================
@@ -279,10 +257,6 @@
     .card{
         width:180px;
         --spacing:180px;
-    }
-
-    .card-caption{
-        font-size:1rem;
     }
 
 }

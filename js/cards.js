@@ -1,32 +1,23 @@
-/*==================================================
-    CARDS.JS
-    PARTE 1
-==================================================*/
-
 const savingsCards = [
 {
     id:"family",
     front:"assets/cards/family.webp",
     back:"assets/cards/family2.webp",
-    text:"Para ayudar <br>a mi familia"
 },
 {
     id:"life",
     front:"assets/cards/life.webp",
     back:"assets/cards/life2.webp",
-    text:"Tener una<br>mejor vida"
 },
 {
     id:"future",
     front:"assets/cards/future.webp",
     back:"assets/cards/future2.webp",
-    text:"Me preocupa<br>mi futuro"
 },
 {
     id:"save",
     front:"assets/cards/savings.webp",
     back:"assets/cards/savings2.webp",
-    text:"Me cuesta <br>trabajo ahorrar"
 }
 ];
 
@@ -79,14 +70,6 @@ function showSavingsCards(){
 
         </div>
 
-        <div
-            class="card-caption"
-            id="cardCaption">
-
-            ${savingsCards[0].text}
-
-        </div>
-
         <button
             class="btn-yellow"
             id="cardContinue">
@@ -104,14 +87,12 @@ function showSavingsCards(){
 }
 
 /*==================================================
-    PARTE 2
     COVERFLOW
 ==================================================*/
 
 function initCoverflow(){
 
     const cards=[...document.querySelectorAll(".card")];
-    const caption=document.getElementById("cardCaption");
     const button=document.getElementById("cardContinue");
 
     let startX=0;
@@ -130,15 +111,6 @@ function initCoverflow(){
             card.classList.toggle("active",offset===0);
 
         });
-
-        caption.classList.remove("show");
-
-        setTimeout(()=>{
-
-            caption.innerHTML=savingsCards[current].text;
-            caption.classList.add("show");
-
-        },180);
 
     }
 
@@ -219,9 +191,6 @@ function initCoverflow(){
 
 }
 
-/*==================================================
-    PARTE 3
-==================================================*/
 
 function getSelectedSavingsCard(){
 
